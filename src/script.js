@@ -33,7 +33,7 @@ fahrenheitTemperature.addEventListener("click", showFTemperature);
 function showTemp(response) {
   let temperatureElement = Math.round(response.data.main.temp);
   let temperatureUnit = document.querySelector("#degrees");
-  temperatureUnit.innerHTML = `${temperatureElement}`;
+  temperatureUnit.innerHTML = `${temperatureElement}°C`;
   document.querySelector(".place").innerHTML = response.data.name;
   document.querySelector(
     "#humidity"
@@ -67,7 +67,7 @@ function showWeather(response) {
   let wind = document.querySelector("#wind");
   wind.innerHTML = `🌬️ ${speed}km/h`;
   let temp = document.querySelector("#degrees");
-  temp.innerHTML = `${temperature}`;
+  temp.innerHTML = `${temperature}°C`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${city}`;
 }
