@@ -142,19 +142,45 @@ ul {
 }
 
 body {
-    background: linear-gradient(112.1deg,
-            rgb(32, 38, 57) 11.4%,
-            rgb(63, 76, 119) 70.2%);
+    background-image: url("../images/stars.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: slidein 100s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@-webkit-keyframes slidein {
+    from {
+        background-position: top;
+        background-size: 3000px;
+    }
+    to {
+        background-position: -100px 0px;
+        background-size: 2750px;
+    }
+}
+
+@keyframes slidein {
+    from {
+        background-position: top;
+        background-size: 3000px;
+    }
+    to {
+        background-position: -100px 0px;
+        background-size: 2750px;
+    }
 }
 
 .col {
     text-align: center;
 }
 
-.card-img {
-    height: 500px;
+.card-body {
+   background: radial-gradient(circle at 50.3% 44.5%, rgb(116, 147, 179) 0%, rgb(62, 83, 104) 100.2%); 
 }
 
-.card-img-2 {
-    height: 150px;
+.coder {
+    color: white;
 }
