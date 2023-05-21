@@ -70,8 +70,8 @@ function showWeather(response) {
   temp.innerHTML = `${temperature}°C`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${city}`;
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute("src",`https://api.openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  let iconElement = document.querySelector("h3");
+  iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 function search(event) {
