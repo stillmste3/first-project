@@ -71,5 +71,13 @@ function showWeather(response) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${city}`;
 }
+function search(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#query");
+  let units = "metric";
+  let apiKey = "33de4fe03ae9604e4f03b1ba6b20de58";
+  let api = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=${units}&appid=${apiKey}`;
+  axios.get(api).then(showWeather);
+}
 let form = document.querySelector("#form");
 form.addEventListener("submit", search);
