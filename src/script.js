@@ -1,4 +1,5 @@
-function formatDate(date) {
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -20,6 +21,41 @@ function formatDate(date) {
 
   return `${day}, ${hours}:${minutes}`;
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  return days[day];
+}
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#daily-forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function(forecastDay,index) {
+    if (index < 6) {
+      forecastHTML = forecastHTML + `<div class="col-2">
+      <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+      <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="45"/>
+      <div class="forecast-temp">
+      <span class="weather-temperature"> $ {
+        Math.round(forecastDay.temp)
+      }°C </span>
+      </div>
+      </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+forecastElement.innerHTML = forecastHTML;
+}
+
 let currentDate = document.querySelector("#time");
 let currentTime = new Date();
 currentDate.innerHTML = formatDate(currentTime);
@@ -71,12 +107,13 @@ function showWeather(response) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${city}`;
   let iconElement = document.querySelector("h3");
-  iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#query");
+  search(searchInput.value);
   let units = "metric";
   let apiKey = "33de4fe03ae9604e4f03b1ba6b20de58";
   let api = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=${units}&appid=${apiKey}`;
@@ -84,3 +121,4 @@ function search(event) {
 }
 let form = document.querySelector("#form");
 form.addEventListener("submit", search);
+search("Krugersdorp");
