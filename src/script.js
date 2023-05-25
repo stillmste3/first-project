@@ -39,7 +39,7 @@ function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#daily-forecast");
   let forecastHTML = `<div class="row">`;
-  forecast.forEach(function(forecastDay,index) {
+  forecast.forEach(function(forecastDay, index) {
     if (index < 6) {
       forecastHTML = forecastHTML + `<div class="col-2">
       <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
@@ -54,6 +54,17 @@ function displayForecast(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
 forecastElement.innerHTML = forecastHTML;
+}
+function showPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let units = "metric";
+  let apiKey = "33de4fe03ae9604e4f03b1ba6b20de58";
+  let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+  axios.get(api).then(showTemp);
+}
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(showPosition);
 }
 
 let currentDate = document.querySelector("#time");
@@ -79,17 +90,7 @@ function showTemp(response) {
   )}km/h`;
   document.querySelector(".sky").innerHTML = response.data.weather[0].main;
 }
-function showPosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let units = "metric";
-  let apiKey = "33de4fe03ae9604e4f03b1ba6b20de58";
-  let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-  axios.get(api).then(showTemp);
-}
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
+
 function showWeather(response) {
   let temperature = Math.round(response.data.main.temp);
   let city = response.data.name;
@@ -113,7 +114,6 @@ function showWeather(response) {
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#query");
-  search(searchInput.value);
   let units = "metric";
   let apiKey = "33de4fe03ae9604e4f03b1ba6b20de58";
   let api = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=${units}&appid=${apiKey}`;
@@ -121,4 +121,3 @@ function search(event) {
 }
 let form = document.querySelector("#form");
 form.addEventListener("submit", search);
-search("Krugersdorp");
