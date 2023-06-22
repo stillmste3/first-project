@@ -31,7 +31,7 @@ small {
   font-weight: 600;
 }
 .background-img {
-  background-image:("./img/clouds.jpg");
+  background-image:("./images/clouds.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
