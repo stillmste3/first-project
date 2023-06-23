@@ -5,6 +5,7 @@
 }
 body {
   font-family: "Courier New", Courier, monospace;
+ background-color: #FFE5B4;
 }
 
 h1 {
@@ -31,11 +32,7 @@ small {
   font-weight: 600;
 }
 .background-img {
-  background-image:("images/clouds.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-  overflow: hidden;
+    background-color: #FFE5B4;
 }
 
 .weather-wrapper {
@@ -97,4 +94,12 @@ small {
 
 .weather-forecast-temperatures {
   font-size: 15px;
+}
+a {
+    text-decoration: none;
+    color: #F10066;
+}
+
+a:hover {
+    color: #0F5298;
 }
